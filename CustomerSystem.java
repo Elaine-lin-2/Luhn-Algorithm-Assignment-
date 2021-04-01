@@ -25,7 +25,6 @@ class CustomerSystem{
             if (userInput.equals(enterCustomerOption)){
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code
-
                 enterCustomerInfo();
             }
             else if (userInput.equals(generateCustomerOption)) {
@@ -75,10 +74,10 @@ class CustomerSystem{
         String postalCode = reader.nextLine();
         return postalCode;
     }
-    public static String creditCard() {
+    public static int creditCard() {
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your credit card: ");
-        String creditCard = reader.nextLine();
+        int creditCard = reader.nextInt();
         return creditCard;
     }
 
@@ -92,7 +91,7 @@ class CustomerSystem{
         String last = lastName();
         String city = city();
         String postalCode = postalCode();
-        String creditCard = creditCard();
+        int creditCard = creditCard();
 
     }
     /*
@@ -120,14 +119,14 @@ class CustomerSystem{
         String last = lastName();
         String city = city();
         String postalCode = postalCode();
-        String creditCard = creditCard();
+        int creditCard = creditCard();
 
         System.out.println("");
         System.out.println("First name: " + first);
         System.out.println("Last name: " + last);
-        System.out.println("city: " + city);
+        System.out.println("City: " + city);
         System.out.println("Postal Code: " + postalCode);
-        System.out.println("credit card number: " + creditCard);
+        System.out.println("Credit card number: " + creditCard);
 
     }
     /*******************************************************************

@@ -51,12 +51,48 @@ class CustomerSystem{
         .concat("Enter menu option (1-9)\n")
         );
     }
+    public static String firstName() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter your first name: ");
+        String first = reader.nextLine();
+        return first;
+    }
+    public static String lastName() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter your last name: ");
+        String last = reader.nextLine();
+        return last;
+    }
+    public static String city() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter your city: ");
+        String city = reader.nextLine();
+        return city;
+    }  
+    public static String postalCode() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter your postal code: ");
+        String postalCode = reader.nextLine();
+        return postalCode;
+    }
+    public static String creditCard() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter your credit card: ");
+        String creditCard = reader.nextLine();
+        return creditCard;
+    }
+
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void enterCustomerInfo() {
+    public static void enterCustomerInfo(){
+        String first = firstName();
+        String last = lastName();
+        String city = city();
+        String postalCode = postalCode();
+        String creditCard = creditCard();
 
     }
     /*
@@ -80,9 +116,18 @@ class CustomerSystem{
     */
     public static void generateCustomerDataFile(){
 
+        String first = firstName();
+        String last = lastName();
+        String city = city();
+        String postalCode = postalCode();
+        String creditCard = creditCard();
 
-
-
+        System.out.println("");
+        System.out.println("First name: " + first);
+        System.out.println("Last name: " + last);
+        System.out.println("city: " + city);
+        System.out.println("Postal Code: " + postalCode);
+        System.out.println("credit card number: " + creditCard);
 
     }
     /*******************************************************************

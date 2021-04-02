@@ -1,9 +1,9 @@
 // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
 
-
-
-
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 // More packages may be imported in the space below
 
 class CustomerSystem{
@@ -25,8 +25,9 @@ class CustomerSystem{
             if (userInput.equals(enterCustomerOption)){
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code
-
+               
                 enterCustomerInfo();
+
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
@@ -41,6 +42,11 @@ class CustomerSystem{
         reader.close();
         System.out.println("Program Terminated");
     }
+
+    /*
+    * Prints the menu
+    * @Author - Mr.Ho
+    */
     public static void printMenu(){
         System.out.println("Customer and Sales System\n"
         .concat("1. Enter Customer Information\n")
@@ -51,56 +57,120 @@ class CustomerSystem{
         .concat("Enter menu option (1-9)\n")
         );
     }
+
+    /*
+    * Prompts user's first name
+    * @return - value of String firstName
+    * @Author - Elaine
+    */
     public static String firstName() {
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your first name: ");
         String first = reader.nextLine();
         return first;
     }
+
+    /*
+    * Prompts user's last name
+    * @return - value of String lastName
+    * @Author - Elaine
+    */
     public static String lastName() {
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your last name: ");
         String last = reader.nextLine();
         return last;
     }
+
+    /*
+    * Prompts a city
+    * @return - value of String city
+    * @Author - Elaine
+    */
     public static String city() {
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your city: ");
         String city = reader.nextLine();
+
         return city;
     }  
-    public static String postalCode() {
+
+    /*
+    * Prompts user's postal code
+    * @return - value of String postalCode
+    * @Author - Elaine
+    */
+    public static String postalCode(){
+
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your postal code: ");
         String postalCode = reader.nextLine();
+
         return postalCode;
+
     }
-    public static String creditCard() {
+
+    /*
+    * Prompts user's credit card number
+    * @return - value of String creditCard
+    * @Author - Elaine
+    */
+
+    public static int creditCard(){
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your credit card: ");
-        String creditCard = reader.nextLine();
+        int creditCard = reader.nextInt();
         return creditCard;
     }
-
+    
     /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
+    * This method validates the postal code by checking 
+    * if it has 3 characters, then detecting if it exits in 
+    * a list of postal codes.
+    * @return - will not return a value
+    * @author - Elaine
     */
-    public static void enterCustomerInfo(){
-        String first = firstName();
-        String last = lastName();
-        String city = city();
+    public static String validatePostalCode(){
+
         String postalCode = postalCode();
-        String creditCard = creditCard();
+        int len = postalCode.length();
 
-    }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
-    public static void validatePostalCode(){
+        if(len>=3){
+            System.out.println("reading file...");
+            String fileName = "postal_codes.csv";
+
+            try{
+                File spreadSheet = new File(fileName);
+                Scanner scnr = new Scanner(spreadSheet);
+                int count = 0;
+
+                while(scnr.hasNextLine()){
+                    
+                    String line = scnr.nextLine();
+                    //System.out.println(line);
+
+                    int index = line.indexOf(postalCode);
+                    //System.out.println(index);
+
+                    if(index >=0){
+                        count = count + 1;
+                    }
+                }
+                if(count==1){
+                    System.out.println("Valid postal code.");
+                }
+                else{
+                    System.out.println("Invalid postal code.");
+                }
+            }
+            catch(FileNotFoundException e){
+                System.out.println(e);
+            }
+        }
+        else{
+            System.out.println("Postal code invalid: must be greater than 3 characters");
+        }
+        return "";
     }
     /*
     * This method may be edited to achieve the task however you like.
@@ -114,20 +184,41 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
+
+
+    /*
+    * Gathers the customer information
+    * @Author - Elaine
+    */
+    public static void enterCustomerInfo(){
+        String first = firstName();
+        String last = lastName();
+        String city = city();
+        String postalCode = validatePostalCode();
+        int creditCard = creditCard();
+    }
+
+    /*
+    * @Author - Tiffany
+    */
+
+    //THIS NEEDS TO BE MODIFIED 
+    //SO THAT it does not prompt the user's input again and 
+    // only PRINTS the pre-entered values
     public static void generateCustomerDataFile(){
 
         String first = firstName();
         String last = lastName();
         String city = city();
-        String postalCode = postalCode();
-        String creditCard = creditCard();
+        String postalCode = validatePostalCode();
+        int creditCard = creditCard();
 
-        System.out.println("");
+        System.out.println();
         System.out.println("First name: " + first);
         System.out.println("Last name: " + last);
-        System.out.println("city: " + city);
+        System.out.println("City: " + city);
         System.out.println("Postal Code: " + postalCode);
-        System.out.println("credit card number: " + creditCard);
+        System.out.println("Credit card number: " + creditCard);
 
     }
     /*******************************************************************

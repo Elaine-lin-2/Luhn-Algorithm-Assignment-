@@ -24,10 +24,8 @@ class CustomerSystem{
 
             if (userInput.equals(enterCustomerOption)){
                 // Only the line below may be editted based on the parameter list and how you design the method return
-		        // Any necessary variables may be added to this if section, but nowhere else in the code
-               
+		        // Any necessary variables may be added to this if section, but nowhere else in the code         
                 enterCustomerInfo();
-
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
@@ -109,14 +107,13 @@ class CustomerSystem{
         return postalCode;
 
     }
-
     /*
     * Prompts user's credit card number
     * @return - value of String creditCard
     * @Author - Elaine
     */
 
-    public static int creditCard(){
+    public static int creditCard() {
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your credit card: ");
         int creditCard = reader.nextInt();
@@ -172,6 +169,7 @@ class CustomerSystem{
         }
         return "";
     }
+
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type

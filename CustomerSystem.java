@@ -1,4 +1,11 @@
 // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
+/*
+ * Date: March 31, 2021
+ * Names: Elaine and Tiffany
+ * Teacher: Mr. Ho
+ * Description: Creating a customer information system that allows users to enter their information, while checking to see if 
+ *              their inputs are accurate and providing them with a personal file + number
+ */
 
 import java.util.Scanner;
 import java.io.File;
@@ -21,6 +28,11 @@ class CustomerSystem{
         do{
             printMenu();                                    // Printing out the main menu
             userInput = reader.nextLine();                  // User selection from the menu
+            String first = firstName();
+            String last = lastName();
+            String city = city();
+            String postalCode = validatePostalCode();
+            String creditCard = creditCard();
 
             if (userInput.equals(enterCustomerOption)){
                 // Only the line below may be editted based on the parameter list and how you design the method return
@@ -113,10 +125,10 @@ class CustomerSystem{
     * @Author - Elaine
     */
 
-    public static int creditCard() {
+    public static String creditCard() {
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your credit card: ");
-        int creditCard = reader.nextInt();
+        String creditCard = reader.nextLine();
         return creditCard;
     }
     
@@ -170,19 +182,11 @@ class CustomerSystem{
         return "";
     }
 
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
+    
     public static void validateCreditCard(){
-    }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
 
+    }
+    
 
     /*
     * Gathers the customer information
@@ -193,7 +197,7 @@ class CustomerSystem{
         String last = lastName();
         String city = city();
         String postalCode = validatePostalCode();
-        int creditCard = creditCard();
+        String creditCard = creditCard();
     }
 
     /*
@@ -209,7 +213,7 @@ class CustomerSystem{
         String last = lastName();
         String city = city();
         String postalCode = validatePostalCode();
-        int creditCard = creditCard();
+        String creditCard = creditCard();
 
         System.out.println();
         System.out.println("First name: " + first);

@@ -3,8 +3,8 @@
  * Date: March 31, 2021
  * Names: Elaine and Tiffany
  * Teacher: Mr. Ho
- * Description: Creating a customer information system that allows users to enter their information, while checking to see if 
- *              their inputs are accurate and providing them with a personal file + number
+ * Description: Creating a customer information system that allows users to enter their information,
+ * while checking to see if their inputs are accurate and providing them with a personal file + number
  */
 
 import java.util.Scanner;
@@ -28,11 +28,6 @@ class CustomerSystemCopy{
         do{
             printMenu();                                    // Printing out the main menu
             userInput = reader.nextLine();                  // User selection from the menu
-            String first = firstName();
-            String last = lastName();
-            String city = city();
-            String postalCode = validatePostalCode();
-            String creditCard = creditCard();
 
             if (userInput.equals(enterCustomerOption)){
                 // Only the line below may be editted based on the parameter list and how you design the method return
@@ -146,21 +141,25 @@ class CustomerSystemCopy{
 
         if(len>=3){
             System.out.println("reading file...");
+            //open the spreadsheet
             String fileName = "postal_codes.csv";
 
             try{
+                //Create a file instance to reference the file 
                 File spreadSheet = new File(fileName);
+                //Read the file
+                //Creates a scanner instance to read the file 
                 Scanner scnr = new Scanner(spreadSheet);
+ 
                 int count = 0;
 
                 while(scnr.hasNextLine()){
                     
+                    //while a line exists
                     String line = scnr.nextLine();
-                    //System.out.println(line);
-
                     int index = line.indexOf(postalCode);
-                    //System.out.println(index);
 
+                    //the postal code has been found
                     if(index >=0){
                         count = count + 1;
                     }

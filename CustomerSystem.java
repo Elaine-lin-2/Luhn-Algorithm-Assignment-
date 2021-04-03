@@ -30,6 +30,9 @@ class CustomerSystemCopy{
             userInput = reader.nextLine();                  // User selection from the menu
 
             String n = creditCard();
+            if (n.length() < 9) {
+                System.out.println("Credit card number must be at least 9 digits");
+            }
             String j = reverseCreditCard(n);
             String first = firstName();
             String last = lastName();
@@ -131,7 +134,7 @@ class CustomerSystemCopy{
 
     public static String creditCard() {
         Scanner reader = new Scanner(System.in);
-        System.out.println("Enter your credit card: ");
+        System.out.println("Enter your credit card (no spaces, at least 9 digits): ");
         String creditCard = reader.nextLine();
         return creditCard;
     }

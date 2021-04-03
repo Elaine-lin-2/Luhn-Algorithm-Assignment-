@@ -208,8 +208,9 @@ class CustomerSystem{
     public static boolean validateCreditCard(){
 
         String j = creditCard();
+        String n = reverseCreditCard(j);
         // Necessary variables
-        if (j.length() < 9) {
+        if (n.length() < 9) {
             System.out.println("Credit card number must be at least 9 digits");
             return false;
         }
@@ -219,8 +220,8 @@ class CustomerSystem{
             int oddSum = 0;
             int totalSum = 0;
             // Runs through each digit/index, 'reads'/gets the numerical value and checks + runs through requirements depending on if it is odd or even
-            for (int i = j.length() - 1; i>=0; i--){
-                int digit = Character.getNumericValue(j.charAt(i));
+            for (int i = n.length() - 1; i>=0; i--){
+                int digit = Character.getNumericValue(n.charAt(i));
                 // For even digits/indexes, b/c the first number is 0, the even digits have to be at odd numbered indexes 
                 if (i % 2 != 0) {
                     int multiplyTwo = digit*2;

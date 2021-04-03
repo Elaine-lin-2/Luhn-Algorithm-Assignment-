@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 // More packages may be imported in the space below
 
 class CustomerSystem{
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] args) {
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
 
@@ -264,6 +264,8 @@ class CustomerSystem{
     /*
     * @Author - Tiffany
     * Takes user's previously entered information + uniquely assigned number, and prints it into a file (name of their choice) 
+    * 
+    *  @return - none, method simply creates/generates customer's file
     */
 
     

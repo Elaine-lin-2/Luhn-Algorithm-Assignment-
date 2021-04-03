@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 // More packages may be imported in the space below
 
 class CustomerSystem{
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException{
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
 
@@ -206,15 +206,14 @@ class CustomerSystem{
 
     
     public static boolean validateCreditCard(){
-
-        String j = creditCard();
-        // Necessary variables
+        String j = reverseCreditCard(creditCard());
+    
+        // Invalid length of credit card number
         if (j.length() < 9) {
             System.out.println("Credit card number must be at least 9 digits");
             return false;
         }
         else{
-            // length of reversed credit card number
             int evenSum = 0;
             int oddSum = 0;
             int totalSum = 0;
@@ -270,6 +269,7 @@ class CustomerSystem{
     
     public static void generateCustomerDataFile() throws FileNotFoundException{
 
+        // Assigns all user's inputs + their number to variables in preparation for file generation
         String first = firstName();
         String last = lastName();
         String city = city();
@@ -279,9 +279,10 @@ class CustomerSystem{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter the file name (.csv):");
         String fileName = in.nextLine();
-        File outFile = new File(fileName);
-        PrintWriter out = new PrintWriter(outFile);
+        File outFile = new File(fileName); // Creates a file based on the user's input
+        PrintWriter out = new PrintWriter(outFile); // Sends user information to file
 
+        // Handles pre-exisiting files w/ the same name
         if (outFile.exists()){
             System.out.print("File already exists, is it okay to overwrite (y/n)? ");
             if (!in.nextLine().startsWith("y")){

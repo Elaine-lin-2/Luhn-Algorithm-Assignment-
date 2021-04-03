@@ -10,11 +10,12 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 // More packages may be imported in the space below
 
 class CustomerSystem{
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException{
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
 
@@ -125,13 +126,7 @@ class CustomerSystem{
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your credit card (no spaces, at least 9 digits): ");
         String creditCard = reader.nextLine();
-
-        String reverse = "";
-        for (int i = creditCard.length() -1; i>=0; i--) {
-            reverse = reverse + creditCard.charAt(i);
-        }
-
-        return reverse;
+        return creditCard;
     }
     
     /*
@@ -206,7 +201,7 @@ class CustomerSystem{
      * Boolean that returns true and prints out "valid" if the user enters a legitimate credit card number 
      * 
      * @param - j, reversed credit card number
-     * @return - true if it is a valid number, false it is invalid
+     * @return - true if it is a valid number, false it is invalid (<9 digits and/or doesn't pass luhn algorithm)
      */
 
     
@@ -267,28 +262,34 @@ class CustomerSystem{
 
     /*
     * @Author - Tiffany
+    * Takes user's previously entered information + uniquely assigned number, and prints it into a file (name of their choice) 
     */
 
-    //THIS NEEDS TO BE MODIFIED 
-    //SO THAT it does not prompt the user's input again and 
-    // only PRINTS the pre-entered values
-    public static void generateCustomerDataFile(){
+    
+    public static void generateCustomerDataFile() throws FileNotFoundException{
 
         String first = firstName();
         String last = lastName();
         String city = city();
-        String postalCode = validatePostalCode();
-        boolean creditCard = validateCreditCard();
+        String postalCode = postalCode();
+        String creditCard = creditCard();
 
-        System.out.println();
-        System.out.println("First name: " + first);
-        System.out.println("Last name: " + last);
-        System.out.println("City: " + city);
-        System.out.println("Postal Code: " + postalCode);
-        System.out.println("Credit card number: " + creditCard);
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the file name (.csv):");
+        String fileName = in.nextLine();
+        File outFile = new File(fileName);
+        PrintWriter out = new PrintWriter(outFile);
 
+        if (outFile.exists()){
+            System.out.print("File already exists, is it okay to overwrite (y/n)? ");
+            if (!in.nextLine().startsWith("y")){
+                out.println(first + ", " + last + ", " + city + ", " + postalCode + ", " + creditCard);
+            }
+        }
+        out.println(first + ", " + last + ", " + city + ", " + postalCode + ", " + creditCard);
+        System.out.println(); // Spacing
+        System.out.println("Your information can now be found in " + fileName);
+        System.out.println(); // Spacing
+        out.close(); 
     }
-    /*******************************************************************
-    *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
-    *******************************************************************/
 }

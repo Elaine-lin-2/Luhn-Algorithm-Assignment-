@@ -230,7 +230,7 @@ class CustomerSystem{
                 if (i % 2 != 0) {
                     int multiplyTwo = digit*2;
                     if (multiplyTwo > 9) {
-                        String product = String.valueOf(multiplyTwo); // convert to string
+                        String product = Integer.toString(multiplyTwo); // convert to string
                         multiplyTwo = Character.getNumericValue(product.charAt(0)) + Character.getNumericValue(product.charAt(1));
                     }
                     evenSum += multiplyTwo;

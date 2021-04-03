@@ -3,8 +3,8 @@
  * Date: March 31, 2021
  * Names: Elaine and Tiffany
  * Teacher: Mr. Ho
- * Description: Creating a customer information system that allows users to enter their information, while checking to see if 
- *              their inputs are accurate and providing them with a personal file + number
+ * Description: Creating a customer information system that allows users to enter their information,
+ * while checking to see if their inputs are accurate and providing them with a personal file + number
  */
 
 import java.util.Scanner;
@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 
 // More packages may be imported in the space below
 
-class CustomerSystem{
+class CustomerSystemCopy{
     public static void main(String[] args){
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
@@ -28,6 +28,7 @@ class CustomerSystem{
         do{
             printMenu();                                    // Printing out the main menu
             userInput = reader.nextLine();                  // User selection from the menu
+
             String n = creditCard();
             String j = reverseCreditCard(n);
             String first = firstName();
@@ -149,21 +150,25 @@ class CustomerSystem{
 
         if(len>=3){
             System.out.println("reading file...");
+            //open the spreadsheet
             String fileName = "postal_codes.csv";
 
             try{
+                //Create a file instance to reference the file 
                 File spreadSheet = new File(fileName);
+                //Read the file
+                //Creates a scanner instance to read the file 
                 Scanner scnr = new Scanner(spreadSheet);
+ 
                 int count = 0;
 
                 while(scnr.hasNextLine()){
                     
+                    //while a line exists
                     String line = scnr.nextLine();
-                    //System.out.println(line);
-
                     int index = line.indexOf(postalCode);
-                    //System.out.println(index);
 
+                    //the postal code has been found
                     if(index >=0){
                         count = count + 1;
                     }

@@ -269,7 +269,7 @@ class CustomerSystem{
     */
 
     
-    public static void generateCustomerDataFile() throws FileNotFoundException{
+    public static void generateCustomerDataFile(){
 
         String first = firstName();
         String last = lastName();
@@ -277,22 +277,27 @@ class CustomerSystem{
         String postalCode = postalCode();
         String creditCard = creditCard();
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter the file name (.csv):");
-        String fileName = in.nextLine();
-        File outFile = new File(fileName);
-        PrintWriter out = new PrintWriter(outFile);
+        try{
+            Scanner in = new Scanner(System.in);
+            System.out.println("Enter the file name (.csv):");
+            String fileName = in.nextLine();
+            File outFile = new File(fileName);
+            PrintWriter out = new PrintWriter(outFile);
 
-        if (outFile.exists()){
-            System.out.print("File already exists, is it okay to overwrite (y/n)? ");
-            if (!in.nextLine().startsWith("y")){
-                out.println(first + ", " + last + ", " + city + ", " + postalCode + ", " + creditCard);
+            if (outFile.exists()){
+                System.out.print("File already exists, is it okay to overwrite (y/n)? ");
+                if (!in.nextLine().startsWith("y")){
+                    out.println(first + ", " + last + ", " + city + ", " + postalCode + ", " + creditCard);
+                }
             }
+            out.println(first + ", " + last + ", " + city + ", " + postalCode + ", " + creditCard);
+            System.out.println(); // Spacing
+            System.out.println("Your information can now be found in " + fileName);
+            System.out.println(); // Spacing
+            out.close(); 
         }
-        out.println(first + ", " + last + ", " + city + ", " + postalCode + ", " + creditCard);
-        System.out.println(); // Spacing
-        System.out.println("Your information can now be found in " + fileName);
-        System.out.println(); // Spacing
-        out.close(); 
+        catch(FileNotFoundException e){
+            System.out.println(e);
+        }
     }
 }

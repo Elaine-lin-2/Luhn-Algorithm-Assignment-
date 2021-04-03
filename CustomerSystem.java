@@ -15,7 +15,11 @@ import java.io.PrintWriter;
 // More packages may be imported in the space below
 
 class CustomerSystem{
+<<<<<<< HEAD
     public static void main(String[] args) throws FileNotFoundException{
+=======
+    public static void main(String[] args) {
+>>>>>>> d9add9075351f64d0af79f20bce9e11785a17257
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
 
@@ -206,10 +210,18 @@ class CustomerSystem{
 
     
     public static boolean validateCreditCard(){
+<<<<<<< HEAD
         String j = reverseCreditCard(creditCard());
     
         // Invalid length of credit card number
         if (j.length() < 9) {
+=======
+
+        String j = creditCard();
+        String n = reverseCreditCard(j);
+        // Necessary variables
+        if (n.length() < 9) {
+>>>>>>> d9add9075351f64d0af79f20bce9e11785a17257
             System.out.println("Credit card number must be at least 9 digits");
             return false;
         }
@@ -218,8 +230,8 @@ class CustomerSystem{
             int oddSum = 0;
             int totalSum = 0;
             // Runs through each digit/index, 'reads'/gets the numerical value and checks + runs through requirements depending on if it is odd or even
-            for (int i = j.length() - 1; i>=0; i--){
-                int digit = Character.getNumericValue(j.charAt(i));
+            for (int i = n.length() - 1; i>=0; i--){
+                int digit = Character.getNumericValue(n.charAt(i));
                 // For even digits/indexes, b/c the first number is 0, the even digits have to be at odd numbered indexes 
                 if (i % 2 != 0) {
                     int multiplyTwo = digit*2;
@@ -262,8 +274,8 @@ class CustomerSystem{
     /*
     * @Author - Tiffany
     * Takes user's previously entered information + uniquely assigned number, and prints it into a file (name of their choice) 
-    *
-    * @return - none, method simply creates/generates customer's file
+    * 
+    *  @return - none, method simply creates/generates customer's file
     */
 
     

@@ -1,4 +1,4 @@
-// Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
+
 /*
  * Date: March 31, 2021
  * Names: Elaine and Tiffany
@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 
 // More packages may be imported in the space below
 
-class CustomerSystemCopy{
+class CustomerSystem{
     public static void main(String[] args){
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
@@ -33,6 +33,12 @@ class CustomerSystemCopy{
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code         
                 enterCustomerInfo();
+
+                String n = creditCard();
+                String j = reverseCreditCard(n);
+                System.out.println(validateCreditCard(j));
+                System.out.println();
+
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
@@ -43,7 +49,7 @@ class CustomerSystemCopy{
             }
 
         } while (!userInput.equals(exitCondition));         // Exits once the user types 
-        
+
         reader.close();
         System.out.println("Program Terminated");
     }
@@ -126,7 +132,7 @@ class CustomerSystemCopy{
         String creditCard = reader.nextLine();
         return creditCard;
     }
-    
+
     /*
     * This method validates the postal code by checking 
     * if it has 3 characters, then detecting if it exits in 
@@ -150,11 +156,11 @@ class CustomerSystemCopy{
                 //Read the file
                 //Creates a scanner instance to read the file 
                 Scanner scnr = new Scanner(spreadSheet);
- 
+
                 int count = 0;
 
                 while(scnr.hasNextLine()){
-                    
+
                     //while a line exists
                     String line = scnr.nextLine();
                     int index = line.indexOf(postalCode);
@@ -180,12 +186,63 @@ class CustomerSystemCopy{
         }
         return "";
     }
-
-    
-    public static void validateCreditCard(){
-
+    /*
+     *@author - Tiffany Liang
+     *
+     * @param - a, entered credit card number
+     * @return - reversed credit card number
+     * */
+    public static String reverseCreditCard(String a){
+        String reverse = "";
+        for (int i = a.length() -1; i>=0; i--) {
+            reverse = reverse + a.charAt(i);
+        }
+        return reverse;
     }
+
+    /*
+     * @author - Tiffany Liang
+     * Boolean that returns true and prints out "valid" if the user enters a legitimate credit card number 
+     * 
+     * @param - j, reversed credit card number
+     * @return - true if it is a valid number, false it is invalid
+     * */
     
+    public static boolean validateCreditCard(String j){
+        // Necessary variables
+        int length = j.length(); // length of reversed credit card number
+        int evenSum = 0;
+        int oddSum = 0;
+        int totalSum = 0;
+        // Runs through each digit/index, 'reads'/gets the numerical value and checks + runs through requirements depending on if it is odd or even
+        for (int i = length - 1; i>=0; i--){
+            int digit = Character.getNumericValue(j.charAt(i));
+            // For even digits/indexes, b/c the first number is 0, the even digits have to be at odd numbered indexes 
+            if (i % 2 != 0) {
+                int multiplyTwo = digit*2;
+                if (multiplyTwo > 9) {
+                    String product = String.valueOf(multiplyTwo); // convert to string
+                    multiplyTwo = Character.getNumericValue(product.charAt(0)) + Character.getNumericValue(product.charAt(1));
+                }
+                evenSum += multiplyTwo;
+            }
+            // For odd digits/indexes
+            else {
+                oddSum += digit;
+            }
+        }
+        totalSum = evenSum + oddSum;
+        // If there is no remainder after dividing the sum by 10, that must mean that it ends with a 0
+        if (totalSum %10 ==0) {
+            System.out.println("Valid credit card");
+            return true;
+        }
+        else {
+            System.out.println("Invalid credit card");
+            return false;
+        }
+    }
+
 
     /*
     * Gathers the customer information
@@ -225,4 +282,4 @@ class CustomerSystemCopy{
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
     *******************************************************************/
-}
+} 

@@ -15,11 +15,7 @@ import java.io.PrintWriter;
 // More packages may be imported in the space below
 
 class CustomerSystem{
-<<<<<<< HEAD
-    public static void main(String[] args) throws FileNotFoundException{
-=======
     public static void main(String[] args) {
->>>>>>> d9add9075351f64d0af79f20bce9e11785a17257
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
 
@@ -210,18 +206,11 @@ class CustomerSystem{
 
     
     public static boolean validateCreditCard(){
-<<<<<<< HEAD
-        String j = reverseCreditCard(creditCard());
-    
-        // Invalid length of credit card number
-        if (j.length() < 9) {
-=======
 
         String j = creditCard();
         String n = reverseCreditCard(j);
         // Necessary variables
         if (n.length() < 9) {
->>>>>>> d9add9075351f64d0af79f20bce9e11785a17257
             System.out.println("Credit card number must be at least 9 digits");
             return false;
         }
@@ -279,7 +268,7 @@ class CustomerSystem{
     */
 
     
-    public static void generateCustomerDataFile() throws FileNotFoundException{
+    public static void generateCustomerDataFile(){
 
         // Assigns all user's inputs + their number to variables in preparation for file generation
         String first = firstName();
@@ -288,23 +277,27 @@ class CustomerSystem{
         String postalCode = postalCode();
         String creditCard = creditCard();
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter the file name (.csv):");
-        String fileName = in.nextLine();
-        File outFile = new File(fileName); // Creates a file based on the user's input
-        PrintWriter out = new PrintWriter(outFile); // Sends user information to file
+        try{
+            Scanner in = new Scanner(System.in);
+            System.out.println("Enter the file name (.csv):");
+            String fileName = in.nextLine();
+            File outFile = new File(fileName);
+            PrintWriter out = new PrintWriter(outFile);
 
-        // Handles pre-exisiting files w/ the same name
-        if (outFile.exists()){
-            System.out.print("File already exists, is it okay to overwrite (y/n)? ");
-            if (!in.nextLine().startsWith("y")){
-                out.println(first + ", " + last + ", " + city + ", " + postalCode + ", " + creditCard);
+            if (outFile.exists()){
+                System.out.print("File already exists, is it okay to overwrite (y/n)? ");
+                if (!in.nextLine().startsWith("y")){
+                    out.println(first + ", " + last + ", " + city + ", " + postalCode + ", " + creditCard);
+                }
             }
+            out.println(first + ", " + last + ", " + city + ", " + postalCode + ", " + creditCard);
+            System.out.println(); // Spacing
+            System.out.println("Your information can now be found in " + fileName);
+            System.out.println(); // Spacing
+            out.close(); 
         }
-        out.println(first + ", " + last + ", " + city + ", " + postalCode + ", " + creditCard);
-        System.out.println(); // Spacing
-        System.out.println("Your information can now be found in " + fileName);
-        System.out.println(); // Spacing
-        out.close(); 
+        catch(FileNotFoundException e){
+            System.out.println(e);
+        }
     }
 }

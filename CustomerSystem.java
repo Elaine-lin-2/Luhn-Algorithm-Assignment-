@@ -7,12 +7,12 @@
  * while checking to see if their inputs are accurate and providing them with a personal file + number
  */
 
+ // Import necessary packages
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-// More packages may be imported in the space below
 
 class CustomerSystem{
     public static void main(String[] args) {
@@ -51,7 +51,7 @@ class CustomerSystem{
                 //adds onto the user ID
                 userID = userID +1;
             }
-            else{
+            else if ((!userInput.equals(enterCustomerOption)) && (!userInput.equals(generateCustomerOption)) && (!userInput.equals(exitCondition))){
                 System.out.println("Please type in a valid option (A number from 1-9)");
             }
             
@@ -260,10 +260,12 @@ class CustomerSystem{
         String j = creditCard(creditCard);
         String n = reverseCreditCard(j);
 
+        // Invalid input
         if (n.length() < 9) {
             System.out.println("Credit card number must be at least 9 digits");
             System.out.println(); // Spacing
         }
+        // Check if number passes Luhn algorithm
         else{
             //set variables to 0
             int evenSum = 0;

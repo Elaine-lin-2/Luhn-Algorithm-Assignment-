@@ -25,6 +25,14 @@ class CustomerSystem{
         exitCondition = "9";
 
         // More variables for the main may be declared in the space below
+        int count = 0;
+        String userVal = "";
+        String first, last, city, postalCode, creditCard;
+        first = "";
+        last = "";
+        city = "";
+        postalCode = "";
+        creditCard = "";
 
         do{
             printMenu();                                    // Printing out the main menu
@@ -33,17 +41,22 @@ class CustomerSystem{
             if (userInput.equals(enterCustomerOption)){
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code         
-                enterCustomerInfo();
-                System.out.println();
+                first = firstName(userVal);
+                last = lastName(userVal);
+                city = city(userVal);
+                postalCode = validatePostalCode(userVal);
+                creditCard = validateCreditCard(userVal);
+                
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
-                generateCustomerDataFile();
+                generateCustomerDataFile(count, first, last, city, postalCode, creditCard) ;
+                count = count +1;
             }
             else{
                 System.out.println("Please type in a valid option (A number from 1-9)");
             }
-
+            
         } while (!userInput.equals(exitCondition));         // Exits once the user types 
         
         reader.close();
@@ -70,10 +83,12 @@ class CustomerSystem{
     * @return - value of String firstName
     * @Author - Elaine
     */
-    public static String firstName() {
+    public static String firstName(String first) {
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your first name: ");
-        String first = reader.nextLine();
+        first = reader.nextLine();
+
+        
         return first;
     }
 
@@ -82,10 +97,12 @@ class CustomerSystem{
     * @return - value of String lastName
     * @Author - Elaine
     */
-    public static String lastName() {
+    public static String lastName(String last) {
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your last name: ");
-        String last = reader.nextLine();
+        last = reader.nextLine();
+
+        
         return last;
     }
 
@@ -94,11 +111,12 @@ class CustomerSystem{
     * @return - value of String city
     * @Author - Elaine
     */
-    public static String city() {
+    public static String city(String city) {
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your city: ");
-        String city = reader.nextLine();
+        city = reader.nextLine();
 
+        
         return city;
     }  
 
@@ -107,28 +125,15 @@ class CustomerSystem{
     * @return - value of String postalCode
     * @Author - Elaine
     */
-    public static String postalCode(){
+    public static String postalCode(String postalCode){
 
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter your postal code: ");
-        String postalCode = reader.nextLine();
+        postalCode = reader.nextLine();
 
         return postalCode;
 
     }
-    /*
-    * Prompts user's credit card number
-    * @return - value of String creditCard
-    * @Author - Elaine
-    */
-
-    public static String creditCard(){
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Enter your credit card (no spaces, at least 9 digits): ");
-        String creditCard = reader.nextLine();
-        return creditCard;
-    }
-    
     /*
     * This method validates the postal code by checking 
     * if it has 3 characters, then detecting if it exits in 
@@ -136,9 +141,9 @@ class CustomerSystem{
     * @return - will not return a value
     * @author - Elaine
     */
-    public static String validatePostalCode(){
+    public static String validatePostalCode(String postalCode){
 
-        String postalCode = postalCode();
+        postalCode = postalCode(postalCode);
         int len = postalCode.length();
 
         if(len>=3){
@@ -155,7 +160,7 @@ class CustomerSystem{
                 int count = 0;
 
                 while(scnr.hasNextLine()){
-                    
+
                     //while a line exists
                     String line = scnr.nextLine();
                     int index = line.indexOf(postalCode);
@@ -167,9 +172,11 @@ class CustomerSystem{
                 }
                 if(count==1){
                     System.out.println("Valid postal code.");
+                    return postalCode;
                 }
                 else{
                     System.out.println("Invalid postal code.");
+                    return postalCode;
                 }
             }
             catch(FileNotFoundException e){
@@ -181,6 +188,20 @@ class CustomerSystem{
         }
         return "";
     }
+
+    /*
+    * Prompts user's credit card number
+    * @return - value of String creditCard
+    * @Author - Elaine
+    */
+
+    public static String creditCard(String creditCard){
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter your credit card (no spaces, at least 9 digits): ");
+        creditCard = reader.nextLine();
+        return creditCard;
+    }
+    
     /*
      *@author - Tiffany Liang
      *
@@ -205,14 +226,13 @@ class CustomerSystem{
      */
 
     
-    public static boolean validateCreditCard(){
+    public static String validateCreditCard(String creditCard){
 
-        String j = creditCard();
+        String j = creditCard(creditCard);
         String n = reverseCreditCard(j);
         // Necessary variables
         if (n.length() < 9) {
             System.out.println("Credit card number must be at least 9 digits");
-            return false;
         }
         else{
             // length of reversed credit card number
@@ -240,25 +260,40 @@ class CustomerSystem{
             // If there is no remainder after dividing the sum by 10, that must mean that it ends with a 0
             if (totalSum %10 ==0) {
                 System.out.println("Valid credit card");
-                return true;
             }
             else {
                 System.out.println("Invalid credit card");
-                return false;
+            
             }
         }
+        return j;
     }
     
     /*
     * Gathers the customer information
     * @Author - Elaine
     */
+    
+    /*
     public static void enterCustomerInfo(){
         String first = firstName();
         String last = lastName();
         String city = city();
         String postalCode = validatePostalCode();
         boolean creditCard = validateCreditCard();
+
+        System.out.println();
+    }
+    */
+
+
+    public static int generateCustomerID(int userID){
+
+        userID = userID+1;
+        System.out.println("customer ID: " + userID);
+        System.out.println();
+
+        return userID;
     }
 
     /*
@@ -269,14 +304,8 @@ class CustomerSystem{
     */
 
     
-    public static void generateCustomerDataFile(){
-
-        String first = firstName();
-        String last = lastName();
-        String city = city();
-        String postalCode = postalCode();
-        String creditCard = creditCard();
-
+    public static void generateCustomerDataFile(int count, String first, String last, String city, String postalCode, String creditCard){
+        
         try{
             Scanner in = new Scanner(System.in);
             System.out.println("Enter the file name (.csv):");
@@ -284,13 +313,16 @@ class CustomerSystem{
             File outFile = new File(fileName);
             PrintWriter out = new PrintWriter(outFile);
 
+            generateCustomerID(count);
+
             if (outFile.exists()){
                 System.out.print("File already exists, is it okay to overwrite (y/n)? ");
                 if (!in.nextLine().startsWith("y")){
                     out.println(first + ", " + last + ", " + city + ", " + postalCode + ", " + creditCard);
                 }
             }
-            out.println(first + ", " + last + ", " + city + ", " + postalCode + ", " + creditCard);
+            System.out.println("Customer information: ");
+            out.println("First Name: "+ first + ", Last Name: " + last + ",  City: " + city + ", Postal Code: " + postalCode + ",  Credit Card: "+ creditCard);
             System.out.println(); // Spacing
             System.out.println("Your information can now be found in " + fileName);
             System.out.println(); // Spacing

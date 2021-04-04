@@ -235,7 +235,6 @@ class CustomerSystem{
             System.out.println("Credit card number must be at least 9 digits");
         }
         else{
-            // length of reversed credit card number
             int evenSum = 0;
             int oddSum = 0;
             int totalSum = 0;
@@ -304,8 +303,20 @@ class CustomerSystem{
     */
 
     
+<<<<<<< HEAD
     public static void generateCustomerDataFile(int count, String first, String last, String city, String postalCode, String creditCard){
         
+=======
+    public static void generateCustomerDataFile(){
+
+        // Assigns all user's inputs + their number to variables in preparation for file generation
+        String first = firstName();
+        String last = lastName();
+        String city = city();
+        String postalCode = postalCode();
+        String creditCard = creditCard();
+
+>>>>>>> 3fbdc0bfbcae3cdd9c2cdb952b2b3ebee6f74a07
         try{
             Scanner in = new Scanner(System.in);
             System.out.println("Enter the file name (.csv):");

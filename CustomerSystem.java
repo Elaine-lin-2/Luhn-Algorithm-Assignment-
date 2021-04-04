@@ -328,7 +328,7 @@ class CustomerSystem{
 
                 //generates a user ID
                 userID = userID+1;
-                System.out.println("Sucess. Your CSV will be generated.");
+                System.out.println("Success. Your CSV will be generated.");
                 System.out.println();
 
                 //Ask the user for the file name
@@ -341,14 +341,8 @@ class CustomerSystem{
                     System.out.print("File already exists, is it okay to overwrite (y/n)? ");
                     if (in.nextLine().startsWith("y")){
                         //prints the customer information
-                        out.println("Customer information: ");
-                        out.println("User ID: " + userID);
-                        out.println("First Name: "+ first);
-                        out.println("Last Name: " + last);
-                        out.println("City: " + city);
-                        out.println("Postal Code: " + postalCode);
-                        out.println("Credit Card: "+ creditCard);
-
+                        out.println("Customer information - " + "User ID: " + userID + ", First Name: "+ first + ", Last Name: " + last + ", City: " + city + ", Postal Code: " + postalCode + ", Credit Card: " + creditCard);
+                        
                         System.out.println(); // Spacing
                         System.out.println("Your information can now be found in " + fileName);
                         System.out.println(); // Spacing

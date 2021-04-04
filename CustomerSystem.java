@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 
 class CustomerSystem{
     public static void main(String[] args) {
-        // Please do not edit any of these variables
+
         Scanner reader = new Scanner(System.in);
 
         String userInput, enterCustomerOption, generateCustomerOption, exitCondition;
@@ -24,10 +24,10 @@ class CustomerSystem{
         generateCustomerOption = "2";
         exitCondition = "9";
 
-        // More variables for the main may be declared in the space below
+        // Declare variables that will be used to store user's info
         int userID = 0;
-        String userVal = "";
-        String first, last, city, postalCode, creditCard;
+        String userVal, first, last, city, postalCode, creditCard;
+        userVal = "";
         first = "";
         last = "";
         city = "";
@@ -38,19 +38,17 @@ class CustomerSystem{
             printMenu();                                    // Printing out the main menu
             userInput = reader.nextLine();                  // User selection from the menu
 
-            if (userInput.equals(enterCustomerOption)){
-                // Only the line below may be editted based on the parameter list and how you design the method return
-		        // Any necessary variables may be added to this if section, but nowhere else in the code         
+            if (userInput.equals(enterCustomerOption)){       
                 first = firstName(userVal);
                 last = lastName(userVal);
                 city = city(userVal);
                 postalCode = validatePostalCode(userVal);
                 creditCard = validateCreditCard(userVal);
-                
             }
             else if (userInput.equals(generateCustomerOption)) {
-                // Only the line below may be editted based on the parameter list and how you design the method return
+                //Generate a customer data file
                 generateCustomerDataFile(userID, first, last, city, postalCode, creditCard);
+                //adds onto the user ID
                 userID = userID +1;
             }
             else{
@@ -88,7 +86,9 @@ class CustomerSystem{
     */
 
     public static String firstName(String first) {
+        //new reader
         Scanner reader = new Scanner(System.in);
+        //Prompts user's first name
         System.out.println("Enter your first name: ");
         first = reader.nextLine();
 
@@ -103,7 +103,9 @@ class CustomerSystem{
     * @Author - Elaine
     */
     public static String lastName(String last) {
+        //new reader
         Scanner reader = new Scanner(System.in);
+        //Prompts user's last name
         System.out.println("Enter your last name: ");
         last = reader.nextLine();
         
@@ -119,11 +121,12 @@ class CustomerSystem{
     */
 
     public static String city(String city) {
+        //new reader
         Scanner reader = new Scanner(System.in);
+        //Prompts a city name
         System.out.println("Enter your city: ");
         city = reader.nextLine();
 
-        
         return city;
     }  
 
@@ -135,14 +138,15 @@ class CustomerSystem{
     * @return postalCode- value of String postalCode
     *
     */
-    public static String postalCode(String postalCode){
 
+    public static String postalCode(String postalCode){
+        //new reader
         Scanner reader = new Scanner(System.in);
+        //Prompts user's postal code
         System.out.println("Enter your postal code: ");
         postalCode = reader.nextLine();
 
         return postalCode;
-
     }
     /*
     * @author - Elaine
@@ -153,9 +157,11 @@ class CustomerSystem{
     * @return - will not return a value
     * 
     */
+
     public static String validatePostalCode(String postalCode){
 
         postalCode = postalCode(postalCode);
+        //Calculates the length of the code
         int len = postalCode.length();
 
         if(len>=3){
@@ -214,7 +220,10 @@ class CustomerSystem{
     */
 
     public static String creditCard(String creditCard){
+        //new reader
         Scanner reader = new Scanner(System.in);
+
+        //Prompts user's credit card number
         System.out.println("Enter your credit card (no spaces, at least 9 digits): ");
         creditCard = reader.nextLine();
         return creditCard;
@@ -229,6 +238,7 @@ class CustomerSystem{
 
     public static String reverseCreditCard(String a){
         String reverse = "";
+        //reverse the credit card
         for (int i = a.length() -1; i>=0; i--) {
             reverse = reverse + a.charAt(i);
         }
@@ -246,20 +256,24 @@ class CustomerSystem{
     
     public static String validateCreditCard(String creditCard){
 
+        // Necessary variables
         String j = creditCard(creditCard);
         String n = reverseCreditCard(j);
-        // Necessary variables
+
         if (n.length() < 9) {
             System.out.println("Credit card number must be at least 9 digits");
             System.out.println(); // Spacing
         }
         else{
+            //set variables to 0
             int evenSum = 0;
             int oddSum = 0;
             int totalSum = 0;
+
             // Runs through each digit/index, 'reads'/gets the numerical value and checks + runs through requirements depending on if it is odd or even
             for (int i = n.length() - 1; i>=0; i--){
                 int digit = Character.getNumericValue(n.charAt(i));
+
                 // For even digits/indexes, b/c the first number is 0, the even digits have to be at odd numbered indexes 
                 if (i % 2 != 0) {
                     int multiplyTwo = digit*2;
@@ -275,6 +289,7 @@ class CustomerSystem{
                 }
             }
             totalSum = evenSum + oddSum;
+
             // If there is no remainder after dividing the sum by 10, that must mean that it ends with a 0
             if (totalSum %10 ==0) {
                 System.out.println("Valid credit card");
@@ -291,21 +306,6 @@ class CustomerSystem{
         
     }
     
-    /*
-    * Gathers the customer information
-    * @Author - Elaine
-    
-    public static void enterCustomerInfo(){
-        String first = firstName();
-        String last = lastName();
-        String city = city();
-        String postalCode = validatePostalCode();
-        boolean creditCard = validateCreditCard();
-
-        System.out.println();
-    }
-    */
-
     /*
     * @Author - Tiffany
     * Takes user's previously entered information + uniquely assigned number, and prints it into a file (name of their choice) 
@@ -325,11 +325,13 @@ class CustomerSystem{
             Scanner in = new Scanner(System.in);
 
             if(!creditCard.equals("") && !postalCode.equals("")){
+
                 //generates a user ID
                 userID = userID+1;
                 System.out.println("Sucess. Your CSV will be generated.");
                 System.out.println();
 
+                //Ask the user for the file name
                 System.out.println("Enter the file name (.csv):");
                 String fileName = in.nextLine();
                 File outFile = new File(fileName);
@@ -337,7 +339,8 @@ class CustomerSystem{
             
                 if(outFile.exists()){
                     System.out.print("File already exists, is it okay to overwrite (y/n)? ");
-                    if (!in.nextLine().startsWith("y")){
+                    if (in.nextLine().startsWith("y")){
+                        //prints the customer information
                         out.println("Customer information: ");
                         out.println("User ID: " + userID);
                         out.println("First Name: "+ first);
@@ -345,20 +348,15 @@ class CustomerSystem{
                         out.println("City: " + city);
                         out.println("Postal Code: " + postalCode);
                         out.println("Credit Card: "+ creditCard);
+
+                        System.out.println(); // Spacing
+                        System.out.println("Your information can now be found in " + fileName);
+                        System.out.println(); // Spacing
+                    }
+                    else{
+                        System.out.println("Failed to generate customer profile");
                     }
                 }
-                
-                out.println("Customer information: ");
-                out.println("User ID: " + userID);
-                out.println("First Name: "+ first);
-                out.println("Last Name: " + last);
-                out.println("City: " + city);
-                out.println("Postal Code: " + postalCode);
-                out.println("Credit Card: "+ creditCard);
-
-                System.out.println(); // Spacing
-                System.out.println("Your information can now be found in " + fileName);
-                System.out.println(); // Spacing
                 out.close(); 
     
             }

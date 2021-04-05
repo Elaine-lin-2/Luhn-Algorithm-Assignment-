@@ -1,4 +1,3 @@
-
 /*
  * Date: April 8, 2021
  * Names: Elaine and Tiffany
@@ -47,9 +46,8 @@ class CustomerSystem{
             }
             else if (userInput.equals(generateCustomerOption)) {
                 //Generate a customer data file
-                generateCustomerDataFile(userID, first, last, city, postalCode, creditCard);
-                //adds onto the user ID
-                userID = userID +1;
+                userID = generateCustomerDataFile(userID, first, last, city, postalCode, creditCard);
+
             }
             else if ((!userInput.equals(enterCustomerOption)) && (!userInput.equals(generateCustomerOption)) && (!userInput.equals(exitCondition))){
                 System.out.println("Please type in a valid option (A number from 1-9)");
@@ -145,6 +143,7 @@ class CustomerSystem{
         //Prompts user's postal code
         System.out.println("Enter your postal code: ");
         postalCode = reader.nextLine();
+        postalCode = postalCode.toUpperCase();
 
         return postalCode;
     }
@@ -318,10 +317,10 @@ class CustomerSystem{
     * @param city - city (use's input)
     * @param postalCode - postal code (user's input)
     * @param creditCard - credit card# (user's input)
-    * @return - none, method simply creates/generates customer's file
+    * @return userID - increases the userID
     */
 
-    public static void generateCustomerDataFile(int userID, String first, String last, String city, String postalCode, String creditCard){
+    public static int generateCustomerDataFile(int userID, String first, String last, String city, String postalCode, String creditCard){
 
         try{
             Scanner in = new Scanner(System.in);
@@ -329,8 +328,7 @@ class CustomerSystem{
             if(!creditCard.equals("") && !postalCode.equals("")){
 
                 //generates a user ID
-                userID = userID+1;
-                System.out.println("Success. Your CSV will be generated.");
+                System.out.println("Success: Your data file CSV will be generated.");
                 System.out.println();
 
                 //Ask the user for the file name
@@ -342,15 +340,17 @@ class CustomerSystem{
                 if(outFile.exists()){
                     System.out.print("File already exists, is it okay to overwrite (y/n)? ");
                     if (in.nextLine().startsWith("y")){
-                        //prints the customer information
-                        out.println("Customer information - " + "User ID: " + userID + ", First Name: "+ first + ", Last Name: " + last + ", City: " + city + ", Postal Code: " + postalCode + ", Credit Card: " + creditCard);
+                        userID = userID+1;
+                        //prints the customer data file
+                        out.println("Customer data file - " + "User ID: " + userID + ", First Name: "+ first + ", Last Name: " + last + ", City: " + city + ", Postal Code: " + postalCode + ", Credit Card: " + creditCard);
                         
                         System.out.println(); // Spacing
                         System.out.println("Your information can now be found in " + fileName);
                         System.out.println(); // Spacing
                     }
                     else{
-                        System.out.println("Failed to generate customer profile");
+                        //Failed to generate a data file
+                        System.out.println("Failed to generate customer data file");
                     }
                 }
                 out.close(); 
@@ -365,8 +365,10 @@ class CustomerSystem{
                 System.out.println(); // Spacing
             }
         }
+        //prints the error message if exists one
         catch(FileNotFoundException e){
             System.out.println(e);
         }
-    }
+        return userID;
+    }  
 }

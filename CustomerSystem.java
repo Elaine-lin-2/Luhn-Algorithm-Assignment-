@@ -230,6 +230,7 @@ class CustomerSystem{
     
     /*
      *@author - Tiffany Liang
+     * Reverses the user's previously entered credit card number
      *
      * @param - a, entered credit card number
      * @return reverse - a reversed credit card number
@@ -246,7 +247,7 @@ class CustomerSystem{
     
     /*
      * @author - Tiffany Liang
-     * Boolean that returns true and prints out "valid" if the user enters a legitimate credit card number 
+     * Method that returns empty and prints out "valid" if the user enters a legitimate credit card number 
      * 
      * @param creditCard - credit card number (user's input)
      * @return - true if it is a valid number, false it is invalid (<9 digits and/or doesn't pass luhn algorithm)
@@ -275,7 +276,7 @@ class CustomerSystem{
             for (int i = n.length() - 1; i>=0; i--){
                 int digit = Character.getNumericValue(n.charAt(i));
 
-                // For even digits/indexes, b/c the first number is 0, the even digits have to be at odd numbered indexes 
+                // For even digits/indexes, b/c the first index is 0, the even digits have to be at odd numbered indexes 
                 if (i % 2 != 0) {
                     int multiplyTwo = digit*2;
                     if (multiplyTwo > 9) {
@@ -327,7 +328,7 @@ class CustomerSystem{
 
             if(!creditCard.equals("") && !postalCode.equals("")){
 
-                //generates a user ID
+                // Successful inputs
                 System.out.println("Success: Your data file CSV will be generated.");
                 System.out.println();
 
@@ -350,12 +351,13 @@ class CustomerSystem{
                     }
                     else{
                         //Failed to generate a data file
-                        System.out.println("Failed to generate customer data file");
+                        System.out.println("You've entered 'n'. Failed to generate customer data file");
                     }
                 }
                 out.close(); 
     
             }
+            // Unsuccessful inputs
             else if(creditCard.equals("") && postalCode.equals("")){
                 System.out.println("Your postal code and credit card are both invalid, unable to generate a profile.");
                 System.out.println(); // Spacing
@@ -365,7 +367,7 @@ class CustomerSystem{
                 System.out.println(); // Spacing
             }
         }
-        //prints the error message if exists one
+        // Prints the error message if one exists
         catch(FileNotFoundException e){
             System.out.println(e);
         }

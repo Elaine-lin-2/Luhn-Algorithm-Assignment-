@@ -1,6 +1,6 @@
 /*
  * Date: April 8, 2021
- * Names: Elaine and Tiffany
+ * Names: Elaine Lin and Tiffany Liang
  * Teacher: Mr. Ho
  * Description: Creating a customer information system that allows users to enter their information,
  * while checking to see if their inputs are accurate and providing them with a personal file + number
@@ -76,11 +76,11 @@ class CustomerSystem{
     }
 
     /*
+    * @Author - Elaine Lin
     * Prompts user's first name
     * 
     * @param first - ""
     * @return - user's first name
-    * @Author - Elaine
     */
 
     public static String firstName(String first) {
@@ -94,11 +94,11 @@ class CustomerSystem{
     }
 
     /*
+    * @Author - Elaine Lin
     * Prompts user's last name
     *
     * @param last - ""
     * @return last - user's last name
-    * @Author - Elaine
     */
     public static String lastName(String last) {
         //new reader
@@ -111,7 +111,7 @@ class CustomerSystem{
     }
 
     /*
-    * @Author - Elaine
+    * @Author - Elaine Lin
     * Prompts a city from the user
     * 
     * @param city - ""
@@ -129,7 +129,7 @@ class CustomerSystem{
     }  
 
     /*
-    * @Author - Elaine
+    * @Author - Elaine Lin
     * Prompts user's postal code
     * 
     * @param postalCode - ""
@@ -148,7 +148,7 @@ class CustomerSystem{
         return postalCode;
     }
     /*
-    * @author - Elaine
+    * @author - Elaine Lin
     * This method validates the postal code by checking if it has 3 characters, then detecting if it exits in 
     * a list of postal codes.
     * 
@@ -210,7 +210,7 @@ class CustomerSystem{
     }
 
     /*
-    * @Author - Elaine
+    * @Author - Elaine Lin
     * Prompts user's credit card number
     * 
     * @param creditCard - ""
@@ -252,7 +252,6 @@ class CustomerSystem{
      * @param creditCard - credit card number (user's input)
      * @return - true if it is a valid number, false it is invalid (<9 digits and/or doesn't pass luhn algorithm)
      */
-
     
     public static String validateCreditCard(String creditCard){
 
@@ -309,7 +308,7 @@ class CustomerSystem{
     }
     
     /*
-    * @Author - Tiffany
+    * @Author - Tiffany Liang & Elaine Lin
     * Takes user's previously entered information + uniquely assigned number, and prints it into a file (name of their choice) 
     * 
     * @param userID - counter to keep track of user's ID
